@@ -39,14 +39,14 @@ for user in users:
     tweets = list(db.tweets.find({"user": user.lower()}).sort('time'))
 
     tweetssize = len(tweets)
-    binsize = tweetssize / n  # for integers this automatically gives the floor rounding, so no need to change this
+    binsize = tweetssize / n  # for integers this automatically gives the floor rounding, so no need to change this.
 
-    #creates a list of random sublists of all the user's tweets
+    #creates a list of random sublists of all the user's tweets.
     allbins = []
     for index in range(n):
-        bin = sample(tweets, binsize)  # takes a random sample of tweets list with size binsize
+        bin = sample(tweets, binsize)  # takes a random sample of tweets list with size binsize.
         for items in bin:
-            tweets.remove(items)  # remove the sample selected from the list of tweets, so we don't have the same tweet appear in multiple bins
+            tweets.remove(items)  # remove the sample selected from the list of tweets, so we don't have the same tweet appear in multiple bins.
         allbins.append(bin)
 
     predictorSquaredErrors = []
@@ -58,7 +58,7 @@ for user in users:
         training = []
         for bin in allbins:
             if bin != testing:
-                training.extend(bin)  # add the bin to the training set if it is not the testing bin, which yields n-1 bins for training and 1 bin for testing
+                training.extend(bin)  # add the bin to the training set if it is not the testing bin, which yields n-1 bins for training and 1 bin for testing.
 
         model = buildModel(training, args.attributes)
 
